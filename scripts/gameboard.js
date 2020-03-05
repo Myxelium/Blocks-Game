@@ -2,7 +2,7 @@
 var viewspeed = 500; // time the player can see the answers MS
 var timeout = 1000;  // Time after all cards showed
 var health = 5;
-var level = 9;
+var level = 50;
 var difficulty = 3;
 var showcontent = false; // show numbers inside the cards
 // Game settings end
@@ -20,6 +20,12 @@ function initiate(){ // Call all the functions
     randomized();
     animation();
     console.log(difficulty);
+}
+
+function calculateCardSize(level) {
+    let sqrt = Math.sqrt(level);
+    
+    return 100/sqrt - 3;
 }
 // function animation(){
 //     for(anim = 0; play_array.length > anim; anim++){
@@ -65,6 +71,7 @@ function calc_difficulty(){
 }
 function make_playground(){
     //Loop out cards on the playground
+    let cardSize = calculateCardSize(level)
     var i;
     for (i = 1; i < level; i++) { //Creates a new div for each loop wth the attributes and content set below.
         var div = document.createElement('div');
@@ -72,8 +79,11 @@ function make_playground(){
         div.textContent = i;
         }
         div.setAttribute('class', 'card');
+        div.style.height = cardSize + '%';
+        div.style.width = cardSize + '%';
         div.setAttribute('id', i);
         div.setAttribute('onClick', 'reply_click(this.id)'); // add an onClick event to the div that sends the id of it to the funcition reply_click()
+
         document.getElementById("wrapper").appendChild(div);
     }
 }

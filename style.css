@@ -1,32 +1,32 @@
-  body {
-        background-color: #1d1e22;
-    }
+body {
+    background-color: #1d1e22;
+    box-sizing: border-box;
+}
 
     #wrapper {
         /* max-width: 1200px; */
-        max-width: 741px;
+        width: 550px;
+        height: 550px;
         margin: 30px auto;
-        padding: 0 20px;
-        width: 100%;
-        display: grid;
-        grid-auto-rows: 100px;
+        /*padding: 0 20px;*/
+        display: flex;
+        flex-flow: row wrap;
+        align-content: flex-start;
+        /*grid-auto-rows: minmax(100px, 1fr);
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        grid-gap: 1em;
+        grid-gap: 1em;*/
     }
-    .flexwrap{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+
     .card {
         border-radius: 10px;
-        padding: 20px;
+        /*padding: 20px;*/
+        margin: 1%;
         color: rgb(255, 255, 255);
         background-color:rgb(0, 94, 165);
         transition: 0.5s;
     }
     .animations{
-      border: 1px solid pink;
+      /*border: 1px solid pink;*/
       background-color: pink;
     }
     .card:hover {
@@ -73,10 +73,7 @@
 			* {
     box-sizing: border-box;
   }
-body{
-  background-color: #1d1e22;
-}
-  .wrapper {
+/*  .wrapper {
     max-width: 1200px;
     margin: 30px auto;
     padding: 0 20px;
@@ -85,7 +82,7 @@ body{
     grid-auto-rows: 100px; 
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
     grid-gap: 1em;
-  }
+  }*/
   
   .diavo {
     border-radius: 10px;
