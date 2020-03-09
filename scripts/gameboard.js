@@ -2,18 +2,21 @@
 var viewspeed = 500; // time the player can see the answers MS
 var timeout = 1000;  // Time after all cards showed
 var health = 5;
-var level = 9;
-var difficulty = 3;
-var showcontent = false; // show numbers inside the cards
+var newPlayground = 3; // replaces the level variable
+var level = newPlayground*newPlayground;
+var difficulty = -1;
+var showcontent = true; // show numbers inside the cards
 // Game settings end
-
+var allow_click = 0;
 var play_array = [];
 var anim = 0; 
 var y = 1;
 var correct_answers = 0;
-
-
+var avoid_repeat = []; // When a card is clicked, the player cant click on same card more than once
+var randoms = 0;
+var room_level;
 function initiate(){ // Call all the functions
+    prep();
     calc_difficulty();
     console.log(level);
     make_playground();
@@ -21,41 +24,58 @@ function initiate(){ // Call all the functions
     animation();
     console.log(difficulty);
 }
-// function animation(){
-//     for(anim = 0; play_array.length > anim; anim++){
-//         // document.getElementById(play_array[anim]).style.border = "3px solid green";
-//         console.log(anim);
-//         // $("#"+play_array[anim]).addClass('animations');
-
-//         // setTimeout(function () { 
-//         //     $("#"+play_array[anim]).removeClass('animations');
-//         // }, 2000);
-        
-        
-//         }
-// }
-function animation () {
+function nextRound(){
+    clear_playground();
+    clear_values()
+    calc_difficulty();
+    console.log(level);
+    make_playground();
+    randomized();
+    animation();
+    console.log(difficulty);
+}
+function prep(){ // handles everythiing before the game starts
+    document.getElementById("start-the-game").style.visibility = "hidden"; //hides the start button
+}
+function animation () { //Animations, shows what cards you click on
     setTimeout(function () {
         $("#"+play_array[anim]).addClass('animations')
         anim++;              
         if (play_array.length > anim) {
-           animation();
+            animation();
         }else{
             basic_timeout();
+            allow_click = 1;
         }
     }, viewspeed)
  }
- function basic_timeout () {
+ function basic_timeout () { // small timeout before you can click and the shown cards disapear.
     setTimeout(function () {
             $(".card").removeClass('animations');
     }, timeout)
  }
-function clear_values(){
-   play_array = [];
-   randoms = null;
+function clear_values(){ // Resets the values for next round.
+    newPlayground = newPlayground + 0.3;
+    difficulty = -1;
+    level = newPlayground * newPlayground;
+    play_array = [];
+    randoms = 0;
+    i = 0;
+    card_ids = 0; 
+    y = 0;
+    anim = 0;
+    clicked_id = 0;
+    allow_click = 0;
+    avoid_repeat = [];
+    correct_answers = 0;
+    console.log("level="+level+"\n difficulty="+difficulty+"\n array="+play_array+"\n clicked_id="+clicked_id); // Console info
+    calc_difficulty();
+    if (difficulty < level){
+
+    }
 }
 function calc_difficulty(){
-    if (level < 9){ // The level value cannot be lower than 9.
+    if (level <= 9){ // The level value cannot be lower than 9.
         level = 9;
     } else{
         level = level + 1;
@@ -65,28 +85,38 @@ function calc_difficulty(){
 }
 function make_playground(){
     //Loop out cards on the playground
-    var i;
-    for (i = 1; i < level; i++) { //Creates a new div for each loop wth the attributes and content set below.
-        var div = document.createElement('div');
-        if(showcontent == true){
-        div.textContent = i;
+    var i = 0;
+    var card_ids = 0;
+    for (var y = 0; y < newPlayground; y++){
+        var row = document.createElement('div');
+            row.setAttribute('id', 'card-row' + y);
+            row.setAttribute('class', 'card-row');
+            document.getElementById("test-group").appendChild(row);
+        for (i = 0; i < newPlayground; i++) { //Creates a new div for each loop wth the attributes and content set below.
+            card_ids++;
+            var div = document.createElement('div');
+            div.setAttribute('class', 'card');
+            div.setAttribute('id', card_ids);
+            div.setAttribute('onClick', 'reply_click(this.id)'); // add an onClick event to the div that sends the id of it to the funcition reply_click()
+            document.getElementById('card-row' + y).appendChild(div);
+            if(showcontent == true){
+                document.getElementById(card_ids).classList.add("printid");
+            }
         }
-        div.setAttribute('class', 'card');
-        div.setAttribute('id', i);
-        div.setAttribute('onClick', 'reply_click(this.id)'); // add an onClick event to the div that sends the id of it to the funcition reply_click()
-        document.getElementById("wrapper").appendChild(div);
     }
 }
 function clear_playground(){ //When called, makes the playground empty
-    document.getElementById("wrapper").innerHTML = "";
+    document.getElementById("test-group").innerHTML = "";
     clear_values();
 } //hello
 
 function randomized(){  // Fills the array with random numbers. Max number determines by level
         while(play_array.length < difficulty){
-            var randoms = Math.floor(Math.random() * level) + 1;
-            if(play_array.indexOf(randoms) === -1){ 
-                play_array.push(randoms);
+            randoms = Math.floor(Math.random() * level);
+            if(randoms != 0){
+                if(play_array.indexOf(randoms) === -1){ 
+                    play_array.push(randoms);
+                }
             }
         }
 }
@@ -96,36 +126,37 @@ function reply_click(clicked_id){ // Grabs the value from the id on the div/card
     console.log("level="+level+"\n difficulty="+difficulty+"\n array="+play_array+"\n clicked_id="+clicked_id); // Console info
 
     if(play_array.includes(clicked_id)){ // Takes the id from the div and searches in the array for it. Returns either true or false.
-        document.getElementById(clicked_id).style.border = "3px solid green"; // Makes the div/cards border green
-        document.getElementById(clicked_id).style.backgroundColor = "green";
-        correct_answers++;
-        if(play_array.length == correct_answers)
-        {
-            alert("You survived this round!");
+        // document.getElementById(clicked_id).style.border = "3px solid green"; // Makes the div/cards border green
+        if(allow_click === 1){
+            if (!avoid_repeat.includes(clicked_id)){
+            document.getElementById(clicked_id).style.backgroundColor = "green";
+            avoid_repeat.push(clicked_id);
+            correct_answers++;
+            if(play_array.length == correct_answers)
+            {
+                alert("You survived this round!");
+                nextRound();
+            }
         }
+    }
     }else{
-        document.getElementById(clicked_id).style.border = "3px solid red"; // Makes the div/cards border red
-        document.getElementById(clicked_id).style.backgroundColor = "red";
-        health--;
-        console.log("Liv: " + health);
-        if(health == 0)
-        {
-            alert("Game over!");
+        //Avoid repeat fix
+        if(allow_click === 1){
+            if (!avoid_repeat.includes(clicked_id)){
+                // document.getElementById(clicked_id).style.border = "3px solid red"; // Makes the div/cards border red
+                document.getElementById(clicked_id).style.backgroundColor = "red";
+    
+                avoid_repeat.push(clicked_id);
+    
+                health--;
+                console.log("Liv: " + health);
+                if(health == 0)
+                {
+                    alert("Game over!");
+                }
+            }
         }
+
     }
     document.getElementById("alerted").innerHTML = clicked_id; // Just prints it out on the screen for testing
 }         
-/*
-pseudocode:'
-/
-            if (exists) clicked_id= randomized[x] = true
-                if (value already added skip(Done with array, if exists/contains)) = false
-                    variable add 1
-                        if variable(int) == all answers(int) = true
-                            next round
-                            add score
-            else
-                health - 1
-                if health < 5
-                    gameover
-*/
