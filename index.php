@@ -4,7 +4,8 @@
 
               <title>My Electron Frameless Window</title>
 			  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-              <link rel="stylesheet" href="style.css">
+              <!-- <link rel="stylesheet" href="style.css"> -->
+              <link rel="stylesheet" href="cards.css">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
     <body>
@@ -21,12 +22,16 @@
     </div>
        <!--- <div loaded="template/window_settings.html"></div> --->
             <div class="flexwrap">
-                <div id="wrapper"></div>
+                <div id="wrapper">
+                    <div id="test-group"></div>
+                </div>
             </div>
-            <button type="button" style="position:fixed" onclick="initiate()">Start</button>
-            <button type="button" style="position:fixed; right: 300px;" onclick="clear_playground()">Clear</button>
+            <!-- <button type="button">Start</button>
+            <button type="button" style="position:fixed; right: 300px;" onclick="clear_playground()">Clear</button> -->
             <div id="alerted"></div>
-        
+            <div id="start-the-game" onclick="initiate()">
+                Start
+            </div>
         <script src="scripts/gameboard.js"></script>
     </body>
 </html>

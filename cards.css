@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Lalezar&display=swap');
+*{
+    transition: .3s;
+}
+.card {
+    cursor: pointer;
+    padding-bottom: 85%;
+    width: 100%;
+    background: rgba(50, 114, 210, 0.5);
+    border-radius: 10px;
+    margin: 3px;
+}
+
+.card-row {
+    width: 100%;
+    margin: 3px;
+}
+
+#test-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+}
+
+#wrapper {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.animations {
+    background-color: rgb(80, 0, 146);
+}
+
+.card:hover {
+    box-shadow: 0 0 10px purple;
+}
+
+.flexwrap::after {
+    position: absolute;
+    top: 0px;
+}
+
+body {
+    background-color: #1d1e22;
+}
+#start-the-game{
+    position: absolute;
+    background-color: #44205c65;
+    height: 100%;
+    width: 100%;
+    z-index: 99999;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    /* font-weight: 900; */
+    font-size: 50vh;
+    font-family: 'Lalezar', cursive;
+    -webkit-text-stroke: 2px rgb(10, 10, 10);
+    text-shadow: -5px 14px 20px rgb(0, 0, 0);
+    cursor: pointer;
+}
+.printid:after{
+        content:attr(id);
+        position: absolute;
+       
+}

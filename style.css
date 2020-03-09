@@ -13,41 +13,12 @@
         grid-gap: 1em;
         
     }  */
-     #wrapper {
-      max-width: 1200px; 
-      max-width: 54%;
-      max-height: 50%;
-      margin: 30px auto;
-      padding: 0 20px;
-      width: 100%;
-      display: flex;
-
-
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      /* grid-auto-rows: 1fr; */
-      /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); */
-      /* grid-gap: 1em; */
-  } 
     .flexwrap{
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .card {
-      border-radius: 10px;
-      padding: 20px;
-      color: rgb(255, 255, 255);
-      background-color: rgb(0, 94, 165);
-      transition: 0.5s;
-      height: 30vh;
-      width: 30vh;
-      min-width: 60px;
-      max-width: 100px;
-      max-height: 100px;
-      margin: 5px;
-  }
+
     .animations{
       border: 1px solid pink;
       background-color: pink;
@@ -99,16 +70,6 @@
 body{
   background-color: #1d1e22;
 }
-  .wrapper {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 0 20px;
-    width: 100%; 
-    display: grid;
-    grid-auto-rows: 100px; 
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
-    grid-gap: 1em;
-  }
   
   .diavo {
     border-radius: 10px;
@@ -126,4 +87,32 @@ body{
   .diavo:nth-child(even) {
     background-color: #afbe29;
   } 
- 
+  .card {
+    cursor: pointer;
+    padding-bottom: 85%;
+    width: 100%;
+    background: rgba(50, 114, 210, 0.5);
+    border-radius: 10px;
+    margin: 3px;
+  }
+  #card-row {
+    width: 100%;
+    margin: 3px;
+  }
+ #test-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+  }
+  #wrapper {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 800px;
+  }
+  
