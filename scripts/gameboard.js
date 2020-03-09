@@ -2,15 +2,16 @@
 var viewspeed = 500; // time the player can see the answers MS
 var timeout = 1000;  // Time after all cards showed
 var health = 5;
-var level = 9;
-var difficulty = 3;
-var showcontent = false; // show numbers inside the cards
+var level = 9*4;
+var difficulty = -1;
+var showcontent = true; // show numbers inside the cards
 // Game settings end
 
 var play_array = [];
 var anim = 0; 
 var y = 1;
 var correct_answers = 0;
+var avoid_repeat = []; // When a card is clicked, the player cant click on same card more than once
 
 
 function initiate(){ // Call all the functions
@@ -104,14 +105,21 @@ function reply_click(clicked_id){ // Grabs the value from the id on the div/card
             alert("You survived this round!");
         }
     }else{
-        document.getElementById(clicked_id).style.border = "3px solid red"; // Makes the div/cards border red
-        document.getElementById(clicked_id).style.backgroundColor = "red";
-        health--;
-        console.log("Liv: " + health);
-        if(health == 0)
-        {
-            alert("Game over!");
+        //Avoid repeat fix
+        if (!avoid_repeat.includes(clicked_id)){
+            document.getElementById(clicked_id).style.border = "3px solid red"; // Makes the div/cards border red
+            document.getElementById(clicked_id).style.backgroundColor = "red";
+
+            avoid_repeat.push(clicked_id);
+
+            health--;
+            console.log("Liv: " + health);
+            if(health == 0)
+            {
+                alert("Game over!");
+            }
         }
+
     }
     document.getElementById("alerted").innerHTML = clicked_id; // Just prints it out on the screen for testing
 }         
