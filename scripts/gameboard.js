@@ -57,7 +57,7 @@ function animation () { //Animations, shows what cards you click on
 function clear_values(){ // Resets the values for next round.
     newPlayground = newPlayground + 0.3;
     difficulty = -1;
-    level = newPlayground * newPlayground;
+    level = Math.ceil(newPlayground * newPlayground);
     play_array = [];
     randoms = 0;
     i = 0;
@@ -130,6 +130,7 @@ function reply_click(clicked_id){ // Grabs the value from the id on the div/card
         if(allow_click === 1){
             if (!avoid_repeat.includes(clicked_id)){
             document.getElementById(clicked_id).style.backgroundColor = "green";
+            document.getElementById(clicked_id).style.backgroundImage = "url(assets/textures/crate-green.png)";
             avoid_repeat.push(clicked_id);
             correct_answers++;
             if(play_array.length == correct_answers)
@@ -145,6 +146,7 @@ function reply_click(clicked_id){ // Grabs the value from the id on the div/card
             if (!avoid_repeat.includes(clicked_id)){
                 // document.getElementById(clicked_id).style.border = "3px solid red"; // Makes the div/cards border red
                 document.getElementById(clicked_id).style.backgroundColor = "red";
+                document.getElementById(clicked_id).style.backgroundImage = "url(assets/textures/crate_bad.png)";
     
                 avoid_repeat.push(clicked_id);
     

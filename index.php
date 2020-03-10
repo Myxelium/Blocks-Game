@@ -8,7 +8,19 @@
               <link rel="stylesheet" href="cards.css">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
-    <body>
+        <style>
+            #particles-js {
+                width: 100%;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: -50;
+                background-image: url(assets/textures/bg.png);
+                background-size: cover;
+                }
+        </style>
+        <div id="particles-js"></div>
         <body>
     <div id="title-bar">
         <div id="title">
@@ -21,6 +33,7 @@
         </div>
     </div>
        <!--- <div loaded="template/window_settings.html"></div> --->
+    
             <div class="flexwrap">
                 <div id="wrapper">
                     <div id="test-group"></div>
@@ -33,5 +46,9 @@
                 Start
             </div>
         <script src="scripts/gameboard.js"></script>
-    </body>
+        
+        <!-- particles.js library -->
+        <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script src="scripts/particles.js"></script>
+    </body> 
 </html>
