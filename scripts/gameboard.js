@@ -7,7 +7,7 @@ var level = newPlayground * newPlayground;
 var difficulty = -1;
 var showcontent = false; // show numbers inside the cards
 // Game settings end
-var allow_click = 0;
+var allow_click = 0; 
 var play_array = [];
 var anim = 0;
 var y = 1;
@@ -51,7 +51,7 @@ function round_value() {
     document.getElementById("round").innerHTML = round_values;
 }
 
-function animation() { //Animations, shows what cards you click on
+function animation() { //Animations, shows what cards you click on. Works like a loop. SetTimout cant be used in normal loop
     setTimeout(function () {
         $("#" + play_array[anim]).addClass('animations')
         anim++;
@@ -104,7 +104,7 @@ function calc_difficulty() {
     } else {
         level = level + 1;
     }
-    difficulty = (35 / 100) * level + difficulty; //calc the difficulty to scale with the level
+    difficulty = (20 / 100) * level + difficulty; //calc the difficulty to scale with the level
     difficulty = Math.round(difficulty) // Makes the difficulty value a integer
 }
 
@@ -120,7 +120,7 @@ function make_playground() {
         for (i = 0; i < newPlayground; i++) { //Creates a new div for each loop wth the attributes and content set below.
             card_ids++;
             var div = document.createElement('div');
-            div.setAttribute('class', 'card');
+            div.setAttribute('class', 'card noSelect');
             div.setAttribute('id', card_ids);
             div.setAttribute('onClick', 'reply_click(this.id)'); // add an onClick event to the div that sends the id of it to the funcition reply_click()
             document.getElementById('card-row' + y).appendChild(div);
@@ -134,7 +134,7 @@ function make_playground() {
 function clear_playground() { //When called, makes the playground empty
     document.getElementById("test-group").innerHTML = "";
     clear_values();
-} //hello
+}
 
 function randomized() { // Fills the array with random numbers. Max number determines by level
     while (play_array.length < difficulty) {
@@ -167,7 +167,7 @@ function reply_click(clicked_id) { // Grabs the value from the id on the div/car
                     } else {
                         document.getElementById("score").innerHTML = parseInt(x) * 2 + 30;
                     }
-                    alert("You survived this round!");
+                    // alert("You survived this round!");
                     nextRound();
                 }
             }
