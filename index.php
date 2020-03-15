@@ -5,7 +5,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="cards.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    
 </head>
 <style>
     #particles-js {
@@ -22,6 +23,11 @@
 <div id="particles-js"></div>
 
 <body>
+<div class="sound_player">
+    <audio id="menu_click">
+        <source src="assets/sounds/menu_click.wav">
+    </audio>
+    </div>
     <div id="title-bar">
         <div id="title">
             Blocks
@@ -50,11 +56,19 @@
     <!-- <button type="button">Start</button>
             <button type="button" style="position:fixed; right: 300px;" onclick="clear_playground()">Clear</button> -->
     <div id="alerted"></div>
-    <div id="start-the-game" onclick="initiate()">
-        Start
+    <div id="start-the-game">
+        <div onmouseover="menu_clicks();" onclick="initiate()">Start</div>
+        <div onmouseover="menu_clicks();" class="settings">Options</div>
     </div>
-    <script src="scripts/gameboard.js"></script>
 
+    <div class="overlay">
+        <div class="narrator">
+
+        </div>
+    </div>
+    
+    <script src="scripts/gameboard.js"></script>
+    <script src="scripts/sound.js"></script>
     <!-- particles.js library -->
     <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="scripts/particles.js"></script>

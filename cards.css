@@ -12,7 +12,14 @@
 * {
     transition: .3s;
 }
-
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 .card {
     cursor: pointer;
     padding-bottom: 85%;
@@ -75,6 +82,7 @@ body {
     top: 0px;
     right: 0px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #fff;
@@ -96,7 +104,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    font-size: 18px;
+    font-size: 100%;
     color: #fff;
     font-family: "8-bit-pusab";
 }
@@ -108,5 +116,24 @@ body {
 }
 
 #health {
-    min-width: 170px;
+    /* min-width: 170px; */
+    min-width: 33%;
+}
+.settings{
+    font-size: 50%;
+}
+#start-the-game *:hover::before {
+    content:'> ';
+}
+@media screen and (max-width: 513px) {
+    .stats {
+        font-size: 64%;
+    }
+    #health{
+            width: 118px;
+            min-width: unset;
+    }
+    #health img {
+        width: 20%;
+    }
 }
