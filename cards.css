@@ -195,6 +195,16 @@ body {
     background: #ff0000;
     cursor: pointer;
   }
+ .slider::-moz-range-thumb {  /* Same thing in firefox as above */
+    width: 15px;
+    height: 15px;
+    background: #ff0000;
+    cursor: pointer;
+    border-radius: 0px;
+    border: 0px solid
+    transparent;
+  }
+
   /* slider ends */
 @media screen and (max-width: 513px) {
     .stats {
