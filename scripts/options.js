@@ -22,4 +22,5 @@ function uncheck() {
 function cardspeed(){
        viewspeed = document.getElementById("card-speed-number-value").value;
        document.getElementById("range-value").innerText = document.getElementById("card-speed-number-value").value;
+       menu_clicks();
 }
