@@ -93,7 +93,33 @@ body {
     text-shadow: -5px 14px 20px rgb(0, 0, 0);
     cursor: pointer;
 }
-
+#options-window {
+    position: absolute;
+    background-color: #000000d4;
+    height: 100%;
+    width: 100%;
+    z-index: 99999;
+    top: 0px;
+    right: 0px;
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    /* font-weight: 900; */
+    font-size: 1vw;
+    font-family: "8-bit-pusab";
+    /* -webkit-text-stroke: 1px rgb(10, 10, 10); */
+    text-shadow: -3px 5px 20px rgb(0, 0, 0);
+    cursor: pointer;
+    display: none;
+}
+.shownumbers-button{
+    display: flex;
+}
+#button-text-01{
+    width: 21vw;
+}
 .printid:after {
     content: attr(id);
     position: absolute;
@@ -122,9 +148,54 @@ body {
 .settings{
     font-size: 50%;
 }
+.cardspeed{
+
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+#range-value{
+    margin: 0 7px;
+}
 #start-the-game *:hover::before {
     content:'> ';
 }
+#options-window div{
+    margin: 1vh 0;
+}
+/* Menu button */
+.menu-nav-button{
+    font-family: "8-bit-pusab";
+    background-color: #ff0000;
+    border: none;
+    color: white;
+    padding: 5px 19px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 11px;
+}
+/* Slider style */
+.slider {
+    -webkit-appearance: none;
+    width: 25%;
+    height: 15px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin: 6;
+}
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #ff0000;
+    cursor: pointer;
+  }
+  /* slider ends */
 @media screen and (max-width: 513px) {
     .stats {
         font-size: 64%;

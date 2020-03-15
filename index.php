@@ -58,9 +58,25 @@
     <div id="alerted"></div>
     <div id="start-the-game">
         <div onmouseover="menu_clicks();" onclick="initiate()">Start</div>
-        <div onmouseover="menu_clicks();" class="settings">Options</div>
+        <div onmouseover="menu_clicks();" onclick="when_clicked()" class="settings">Options</div>
     </div>
-
+    <div id="options-window">
+    <div class="cardspeed">
+        <div>Card speed:</div>
+        <div id="range-value">500</div>
+        <input type="range" class="slider" onchange="cardspeed()" id="card-speed-number-value" min="10" max="2000">
+    </div>
+     <div class="shownumbers-button">
+            <div class="button-icon">
+                <img src="assets/textures/button_off.png" onclick="menu_clicks();check();document.getElementById('btn-off').style.display = 'none';document.getElementById('btn-on').style.display = 'block';" id="btn-off" alt="off">
+                <img src="assets/textures/button_on.png" onclick="menu_clicks();uncheck();document.getElementById('btn-on').style.display = 'none';document.getElementById('btn-off').style.display = 'block';" style="display: none;" id="btn-on" alt="off">
+            </div>
+            <div id="button-text-01">
+                Turn on card numbers
+            </div>
+     </div>
+     <button onclick="menu_clicks();when_clicked_back();" class="menu-nav-button">Back</button>
+    </div>
     <div class="overlay">
         <div class="narrator">
 
@@ -69,6 +85,7 @@
     
     <script src="scripts/gameboard.js"></script>
     <script src="scripts/sound.js"></script>
+    <script src="scripts/options.js"></script>
     <!-- particles.js library -->
     <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="scripts/particles.js"></script>

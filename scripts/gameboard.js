@@ -134,7 +134,7 @@ function make_playground() {
 function clear_playground() { //When called, makes the playground empty
     document.getElementById("test-group").innerHTML = "";
     clear_values();
-} //hello
+}
 
 function randomized() { // Fills the array with random numbers. Max number determines by level
     while (play_array.length < difficulty) {
@@ -167,7 +167,7 @@ function reply_click(clicked_id) { // Grabs the value from the id on the div/car
                     } else {
                         document.getElementById("score").innerHTML = parseInt(x) * 2 + 30;
                     }
-                    alert("You survived this round!");
+                    // alert("You survived this round!");
                     nextRound();
                 }
             }
