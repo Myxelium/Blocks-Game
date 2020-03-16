@@ -19,6 +19,14 @@ function uncheck() {
     showcontent = false;
     document.getElementById("button-text-01").innerHTML = "Turn on card numbers";
 }
+function check_allowspin() {
+    allow_spin = true;
+    document.getElementById("button-text-01-spin").innerHTML = "Disable spinning board";
+  }
+function uncheck_allowspin() {
+    allow_spin = false;
+    document.getElementById("button-text-01-spin").innerHTML = "Enable spinning board";
+}
 function cardspeed(){
        viewspeed = document.getElementById("card-speed-number-value").value;
        document.getElementById("range-value").innerText = document.getElementById("card-speed-number-value").value;

@@ -1,11 +1,12 @@
 // Game settings
 var viewspeed = 500; // time the player can see the answers MS
-var timeout = 1000; // Time after all cards showed
+var timeout = 500; // Time after all cards showed
 var health = 5;
 var newPlayground = 3; // replaces the level variable
 var level = newPlayground * newPlayground;
-var difficulty = -1;
+var difficulty = 1;
 var showcontent = false; // show numbers inside the cards
+var allow_spin = true;
 // Game settings end
 var allow_click = 0; 
 var play_array = [];
@@ -39,6 +40,7 @@ function nextRound() {
     make_playground();
     randomized();
     animation();
+    
     console.log(difficulty);
 }
 
@@ -60,6 +62,7 @@ function animation() { //Animations, shows what cards you click on. Works like a
         } else {
             basic_timeout();
             allow_click = 1;
+            spin_round();
         }
     }, viewspeed)
 }
@@ -77,9 +80,9 @@ function lifes() {
 }
 
 function clear_values() { // Resets the values for next round.
-    newPlayground = newPlayground + 0.3;
+    // newPlayground = newPlayground + 0.1;
     no_fail_round = 0;
-    difficulty = -1;
+    difficulty = 1;
     level = Math.ceil(newPlayground * newPlayground);
     play_array = [];
     randoms = 0;
@@ -91,20 +94,38 @@ function clear_values() { // Resets the values for next round.
     allow_click = 0;
     avoid_repeat = [];
     correct_answers = 0;
-    console.log("level=" + level + "\n difficulty=" + difficulty + "\n array=" + play_array + "\n clicked_id=" + clicked_id); // Console info
+    console.log("level=" + level + "\n difficulty=" + difficulty + "\n array=" + play_array + "\n clicked_id=" + clicked_id + "\n NewPLaygroud=" + newPlayground*newPlayground); // Console info
     calc_difficulty();
-    // if (difficulty < level) {
-
-    // }
+    newPlayground = newPlayground + 0.1;
 }
-
+function spin_round(){
+    if(allow_spin === true){
+        if(round_values >= 7 && 9>= round_values || round_values >= 12 && round_values % 3){
+            document.getElementById("wrapper").style.transform = 'rotate(180deg)';
+            
+            document.getElementById("wrapper").style.height = 'unset';
+            let x = document.getElementsByClassName("card");
+            let i;
+            for (i = 0; i < x.length; i++) {
+            x[i].style.transform = 'rotate(180deg)';
+    
+            }
+        }else{
+            document.getElementById("wrapper").style.transform = 'rotate(0deg)';
+            // let x = document.getElementsByClassName("card");
+            // let i;
+            // for (i = 0; i < x.length; i++) {
+            // x[i].style.transform = 'rotate(0deg)';
+            // }
+        }
+    }
+}
 function calc_difficulty() {
     if (level <= 9) { // The level value cannot be lower than 9.
         level = 9;
-    } else {
-        level = level + 1;
     }
-    difficulty = (20 / 100) * level + difficulty; //calc the difficulty to scale with the level
+    // difficulty = (20 / 100) * level + difficulty; //calc the difficulty to scale with the level
+    difficulty = (20 / 100) * level % 3 + difficulty; //calc the difficulty to scale with the level
     difficulty = Math.round(difficulty) // Makes the difficulty value a integer
 }
 
@@ -161,7 +182,7 @@ function reply_click(clicked_id) { // Grabs the value from the id on the div/car
                 correct_answers++;
                 let x = document.getElementById("score").textContent;
 
-                if (play_array.length == correct_answers) {
+                if (play_array.length === correct_answers) {
                     if (no_fail_round != 0) {
                         document.getElementById("score").innerHTML = parseInt(x) * 1 + 13;
                     } else {
@@ -188,7 +209,22 @@ function reply_click(clicked_id) { // Grabs the value from the id on the div/car
                 no_fail_round = 1;
                 console.log("Liv: " + health);
                 if (health == 0) {
-                    alert("Game over!");
+                    allow_click = 0;
+                    document.getElementById("start-the-game-loose").style.display = "flex";
+                    // alert("Game over!");
+                    card_ids = card_ids + 1;
+                    for(var xo = 1; card_ids <= xo; xo++){
+                        if(play_array.includes(xo)){
+                            document.getElementById(xo).style.backgroundColor = "green";
+                            document.getElementById(xo).style.backgroundImage = "url(assets/textures/crate-green.png)";
+                        }else{
+                            document.getElementById(xo).style.backgroundColor = "red";
+                            document.getElementById(xo).style.backgroundImage = "url(assets/textures/crate_bad.png)";
+                        }
+                        
+                    }
+                    
+                    
                 }
             }
         }

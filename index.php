@@ -60,6 +60,10 @@
         <div onmouseover="menu_clicks();" onclick="initiate()">Start</div>
         <div onmouseover="menu_clicks();" onclick="when_clicked()" class="settings">Options</div>
     </div>
+    <div id="start-the-game-loose" class="try-again">
+        <div onmouseover="menu_clicks();" onclick="location.reload();">Try Again?</div>
+
+    </div>
     <div id="options-window">
     <div class="cardspeed">
         <div>Card speed:</div>
@@ -73,6 +77,15 @@
             </div>
             <div id="button-text-01">
                 Turn on card numbers
+            </div>
+     </div>
+     <div class="shownumbers-button">
+            <div class="button-icon">
+                <img src="assets/textures/button_off.png" onclick="menu_clicks();check_allowspin();document.getElementById('btn-off-spin').style.display = 'none';document.getElementById('btn-on-spin').style.display = 'block';" style="display: none;" id="btn-off-spin" alt="off">
+                <img src="assets/textures/button_on.png" onclick="menu_clicks();uncheck_allowspin();document.getElementById('btn-on-spin').style.display = 'none';document.getElementById('btn-off-spin').style.display = 'block';" id="btn-on-spin" alt="off">
+            </div>
+            <div id="button-text-01-spin">
+                Disable spinning board
             </div>
      </div>
      <button onclick="menu_clicks();when_clicked_back();" class="menu-nav-button">Back</button>

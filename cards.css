@@ -93,6 +93,26 @@ body {
     text-shadow: -5px 14px 20px rgb(0, 0, 0);
     cursor: pointer;
 }
+#start-the-game-loose {
+    position: absolute;
+    background-color: #44205c65;
+    height: 100%;
+    width: 100%;
+    z-index: 99999;
+    top: 0px;
+    right: 0px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    /* font-weight: 900; */
+    font-size: 9vw;
+    font-family: "8-bit-pusab";
+    -webkit-text-stroke: 2px rgb(10, 10, 10);
+    text-shadow: -5px 14px 20px rgb(0, 0, 0);
+    cursor: pointer;
+}
 #options-window {
     position: absolute;
     background-color: #000000d4;
@@ -153,6 +173,10 @@ body {
     display: flex;
     align-items: center;
     width: fit-content;
+}
+.try-again{
+    display: none;
+    font-size: 3vw;
 }
 #range-value{
     margin: 0 7px;
