@@ -21,11 +21,11 @@ function uncheck() {
 }
 function check_allowspin() {
     allow_spin = true;
-    document.getElementById("button-text-01-spin").innerHTML = "Disable spinning board";
+    document.getElementById("button-text-01-spin").innerHTML = "Disable spinning";
   }
 function uncheck_allowspin() {
     allow_spin = false;
-    document.getElementById("button-text-01-spin").innerHTML = "Enable spinning board";
+    document.getElementById("button-text-01-spin").innerHTML = "Enable spinning";
 }
 function cardspeed(){
        viewspeed = document.getElementById("card-speed-number-value").value;

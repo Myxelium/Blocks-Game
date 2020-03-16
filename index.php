@@ -43,6 +43,7 @@
     <div class="flexwrap">
         <div class="stats">
             <div id="health"></div>
+            <div id="timer-counter"><label id="minutes">00</label>:<label id="seconds">00</label></div>
             <div id="container_r">Round:&nbsp;<div id="round"></div>
             </div>
             <div id="container_r">&nbsp;Score:&nbsp;<div id="score">0</div>
@@ -85,7 +86,7 @@
                 <img src="assets/textures/button_on.png" onclick="menu_clicks();uncheck_allowspin();document.getElementById('btn-on-spin').style.display = 'none';document.getElementById('btn-off-spin').style.display = 'block';" id="btn-on-spin" alt="off">
             </div>
             <div id="button-text-01-spin">
-                Disable spinning board
+                Disable spinning
             </div>
      </div>
      <button onclick="menu_clicks();when_clicked_back();" class="menu-nav-button">Back</button>
@@ -99,6 +100,7 @@
     <script src="scripts/gameboard.js"></script>
     <script src="scripts/sound.js"></script>
     <script src="scripts/options.js"></script>
+    <script src="scripts/timer.js"></script>
     <!-- particles.js library -->
     <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="scripts/particles.js"></script>

@@ -20,6 +20,7 @@ var no_fail_round = 0;
 var round_values = 0;
 
 function initiate() { // Call all the functions
+    setInterval(setTime, 1000);
     round_value();
     lifes();
     prep();
