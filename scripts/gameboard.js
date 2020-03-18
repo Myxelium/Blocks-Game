@@ -7,6 +7,7 @@ var level = newPlayground * newPlayground;
 var difficulty = 1;
 var showcontent = false; // show numbers inside the cards
 var allow_spin = true;
+var nofail = false;
 // Game settings end
 var allow_click = 0; 
 var play_array = [];
@@ -18,8 +19,14 @@ var randoms = 0;
 var room_level;
 var no_fail_round = 0;
 var round_values = 0;
+var translation = 1; // Spinning speed
+// level transformations
+var break_point_level_space = 10;
+var break_point_level_slime = 20;
+var blackhole_size = 10;
 
 function initiate() { // Call all the functions
+    setInterval(setTime, 1000);
     round_value();
     lifes();
     prep();
@@ -39,9 +46,10 @@ function nextRound() {
     console.log(level);
     make_playground();
     randomized();
+    viewspeed_round_counter();
     animation();
-    
     console.log(difficulty);
+    level_skins();
 }
 
 function prep() { // handles everythiing before the game starts
@@ -52,10 +60,18 @@ function round_value() {
     round_values++;
     document.getElementById("round").innerHTML = round_values;
 }
-
+function viewspeed_round_counter(){
+    if(viewspeed > 10){
+        viewspeed = viewspeed - 20;
+    }
+}
 function animation() { //Animations, shows what cards you click on. Works like a loop. SetTimout cant be used in normal loop
     setTimeout(function () {
-        $("#" + play_array[anim]).addClass('animations')
+        if(round_values > break_point_level_space){
+            $("#" + play_array[anim]).addClass('space')
+        } else {
+            $("#" + play_array[anim]).addClass('animations')
+        }
         anim++;
         if (play_array.length > anim) {
             animation();
@@ -70,6 +86,7 @@ function animation() { //Animations, shows what cards you click on. Works like a
 function basic_timeout() { // small timeout before you can click and the shown cards disapear.
     setTimeout(function () {
         $(".card").removeClass('animations');
+        $(".card").removeClass('space');
     }, timeout)
 }
 
@@ -97,18 +114,17 @@ function clear_values() { // Resets the values for next round.
     console.log("level=" + level + "\n difficulty=" + difficulty + "\n array=" + play_array + "\n clicked_id=" + clicked_id + "\n NewPLaygroud=" + newPlayground*newPlayground); // Console info
     calc_difficulty();
     newPlayground = newPlayground + 0.1;
+
 }
 function spin_round(){
     if(allow_spin === true){
         if(round_values >= 7 && 9>= round_values || round_values >= 12 && round_values % 3){
             document.getElementById("wrapper").style.transform = 'rotate(180deg)';
-            
             document.getElementById("wrapper").style.height = 'unset';
             let x = document.getElementsByClassName("card");
             let i;
             for (i = 0; i < x.length; i++) {
-            x[i].style.transform = 'rotate(180deg)';
-    
+                x[i].style.transform = 'rotate(180deg)';
             }
         }else{
             document.getElementById("wrapper").style.transform = 'rotate(0deg)';
@@ -117,6 +133,18 @@ function spin_round(){
             // for (i = 0; i < x.length; i++) {
             // x[i].style.transform = 'rotate(0deg)';
             // }
+        }
+        if(round_values >= 15 && 29 >= round_values){
+            if(tranlsation != 0.3){
+                translation = translation - 0.1;
+            }
+            document.getElementById("wrapper").style.transform = 'scale(-1)';
+            document.getElementById("wrapper").style.transition = translation + 's';
+            let x = document.getElementsByClassName("card");
+            let i;
+            for (i = 0; i < x.length; i++) {
+                x[i].style.transform = 'rotate(180deg)';
+            }
         }
     }
 }
@@ -127,6 +155,31 @@ function calc_difficulty() {
     // difficulty = (20 / 100) * level + difficulty; //calc the difficulty to scale with the level
     difficulty = (20 / 100) * level % 3 + difficulty; //calc the difficulty to scale with the level
     difficulty = Math.round(difficulty) // Makes the difficulty value a integer
+}
+function level_skins(){
+            
+    if(round_values > break_point_level_space){
+        blackhole_size = blackhole_size + 10;
+        document.getElementsByClassName("cos-portal")[0].style.display = "flex";
+        document.getElementById("blackhole").style.width = blackhole_size + "%";
+        let i;
+        let x = document.getElementsByClassName("card");
+            for (i = 0; i < x.length; i++) {
+                document.getElementsByClassName("card")[i].style.backgroundImage = "url(assets/textures/iron_crate.png)";
+                
+            }
+            document.getElementById("particles-js").style.backgroundImage = "url(assets/textures/space.png)";
+    }
+    if(round_values > break_point_level_slime){
+        let i;
+        document.getElementsByClassName("cos-portal")[0].style.display = "none";
+        let x = document.getElementsByClassName("card");
+            for (i = 0; i < x.length; i++) {
+                document.getElementsByClassName("card")[i].style.backgroundImage = "url(assets/textures/slime_crate.png)";
+                
+            }
+            document.getElementById("particles-js").style.backgroundImage = "url(assets/textures/slime-placeholder.png)";
+    }
 }
 
 function make_playground() {
@@ -145,8 +198,14 @@ function make_playground() {
             div.setAttribute('id', card_ids);
             div.setAttribute('onClick', 'reply_click(this.id)'); // add an onClick event to the div that sends the id of it to the funcition reply_click()
             document.getElementById('card-row' + y).appendChild(div);
+            /*Content*/
             if (showcontent == true) {
-                document.getElementById(card_ids).classList.add("printid");
+            let content = document.createElement('div');
+            content.appendChild(document.createTextNode(card_ids));
+            content.setAttribute('class', 'card-numbers');
+            document.getElementById(card_ids).appendChild(content);
+            
+            //   document.getElementById(card_ids).classList.add("printid");
             }
         }
     }
@@ -208,7 +267,7 @@ function reply_click(clicked_id) { // Grabs the value from the id on the div/car
                 list.removeChild(list.childNodes[0]);
                 no_fail_round = 1;
                 console.log("Liv: " + health);
-                if (health == 0) {
+                if (health == 0 && nofail === false) {
                     allow_click = 0;
                     document.getElementById("start-the-game-loose").style.display = "flex";
                     // alert("Game over!");

@@ -11,14 +11,20 @@
 
 * {
     transition: .3s;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges; /*Mozilla*/
 }
+
 .noSelect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
+    user-select: none; 
+}
+.card-numbers{
+    position: absolute;
 }
 .card {
     cursor: pointer;
@@ -30,6 +36,7 @@
     background-size: cover;
     border-radius: 10px;
     margin: 3px;
+
 }
 
 .card-row {
@@ -46,15 +53,35 @@
 }
 
 #wrapper {
-    height: 100vh;
+    /* height: 100vh; */
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
     max-width: 800px;
+    
 }
-
+.space {
+    /* background-color: rgb(80, 0, 146); */
+    background-image: url(assets/textures/iron_crate_event.png) !important;
+}
+.cos-portal{
+    width: 100%;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    top: 0px;
+    justify-content: center;
+    position: fixed;
+    display: none;
+    transition: 10s !important;
+    -webkit-animation: rotating 20s linear infinite;
+    -moz-animation: rotating 20s linear infinite;
+    -ms-animation: rotating 20s linear infinite;
+    -o-animation: rotating 20s linear infinite;
+    animation: rotating 20s linear infinite;
+}
 .animations {
     /* background-color: rgb(80, 0, 146); */
     filter: invert(1);
@@ -71,6 +98,7 @@
 
 body {
     background-color: #1d1e22;
+    overflow-x: hidden;
 }
 
 #start-the-game {
@@ -228,7 +256,35 @@ body {
     border: 0px solid
     transparent;
   }
-
+  /*rotatating blakc hole animations*/
+  @-webkit-keyframes rotating /* Safari and Chrome */ {
+    from {
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes rotating {
+    from {
+      -ms-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -ms-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
   /* slider ends */
 @media screen and (max-width: 513px) {
     .stats {

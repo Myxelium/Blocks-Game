@@ -1,6 +1,4 @@
 // gameboard.js required
-
-
 function when_clicked(){
     document.getElementById("particles-js").style.backgroundImage = "url(assets/textures/options.png)";
     document.getElementById("start-the-game").style.display = "none";
@@ -19,13 +17,21 @@ function uncheck() {
     showcontent = false;
     document.getElementById("button-text-01").innerHTML = "Turn on card numbers";
 }
+function check_nofail() {
+    nofail = true;
+    document.getElementById("button-text-01-fail").innerHTML = "Turn off no fail";
+  }
+function uncheck_nofail() {
+    nofail = false;
+    document.getElementById("button-text-01-fail").innerHTML = "Turn on no fail";
+}
 function check_allowspin() {
     allow_spin = true;
-    document.getElementById("button-text-01-spin").innerHTML = "Disable spinning board";
+    document.getElementById("button-text-01-spin").innerHTML = "Disable spinning";
   }
 function uncheck_allowspin() {
     allow_spin = false;
-    document.getElementById("button-text-01-spin").innerHTML = "Enable spinning board";
+    document.getElementById("button-text-01-spin").innerHTML = "Enable spinning";
 }
 function cardspeed(){
        viewspeed = document.getElementById("card-speed-number-value").value;
