@@ -2,7 +2,7 @@
 
 <head>
     <title>Blocks demo</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="cards.css">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
@@ -39,7 +39,9 @@
         </div>
     </div>
     <!--- <div loaded="template/window_settings.html"></div> --->
-
+    <div class="cos-portal">
+        <img id="blackhole" src="assets/textures/portal">
+    </div>
     <div class="flexwrap">
         <div class="stats">
             <div id="health"></div>
@@ -82,6 +84,15 @@
      </div>
      <div class="shownumbers-button">
             <div class="button-icon">
+                <img src="assets/textures/button_off.png" onclick="menu_clicks();check_nofail();document.getElementById('btn-off-fail').style.display = 'none';document.getElementById('btn-on-fail').style.display = 'block';" id="btn-off-fail" alt="off">
+                <img src="assets/textures/button_on.png" onclick="menu_clicks();uncheck_nofail();document.getElementById('btn-on-fail').style.display = 'none';document.getElementById('btn-off-fail').style.display = 'block';" style="display: none;" id="btn-on-fail" alt="off">
+            </div>
+            <div id="button-text-01-fail">
+                Turn on no fail
+            </div>
+     </div>
+     <div class="shownumbers-button">
+            <div class="button-icon">
                 <img src="assets/textures/button_off.png" onclick="menu_clicks();check_allowspin();document.getElementById('btn-off-spin').style.display = 'none';document.getElementById('btn-on-spin').style.display = 'block';" style="display: none;" id="btn-off-spin" alt="off">
                 <img src="assets/textures/button_on.png" onclick="menu_clicks();uncheck_allowspin();document.getElementById('btn-on-spin').style.display = 'none';document.getElementById('btn-off-spin').style.display = 'block';" id="btn-on-spin" alt="off">
             </div>
@@ -91,6 +102,7 @@
      </div>
      <button onclick="menu_clicks();when_clicked_back();" class="menu-nav-button">Back</button>
     </div>
+    
     <div class="overlay">
         <div class="narrator">
 
@@ -101,9 +113,16 @@
     <script src="scripts/sound.js"></script>
     <script src="scripts/options.js"></script>
     <script src="scripts/timer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FitText.js/1.2.0/jquery.fittext.min.js"></script>
+    
     <!-- particles.js library -->
     <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
     <script src="scripts/particles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FitText.js/1.1/jquery.fittext.min.js"></script>
+    <script>
+        jQuery(".card-numbers").fitText();
+    </script>
 </body>
 
 </html>
